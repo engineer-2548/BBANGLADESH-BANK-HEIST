@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infographic: Anatomy of the Bangladesh Bank Heist</title>
+    <title>HACKED: The Bangladesh Bank Heist</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --danger-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --primary: #0496FF;
+            --primary-dark: #00487C;
+            --secondary: #4BB3FD;
+            --accent: #027BCE;
+            --danger: #FF0035;
+            --success: #00D9FF;
+            --warning: #FFB700;
+            --bg-light: #F0F4F8;
+            --text-dark: #1A202C;
         }
 
         * {
@@ -23,307 +30,300 @@
 
         body {
             font-family: 'Kanit', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            position: relative;
+            background: #0a0e27;
+            color: white;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Animated background particles */
-        body::before {
-            content: '';
+        /* Matrix rain effect */
+        .matrix-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
-            animation: float 20s ease-in-out infinite;
-            pointer-events: none;
             z-index: -1;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, -30px) rotate(120deg); }
-            66% { transform: translate(-20px, 20px) rotate(240deg); }
-        }
-
-        /* Glass morphism effect */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 
-                0 8px 32px 0 rgba(31, 38, 135, 0.15),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 
-                0 12px 40px 0 rgba(31, 38, 135, 0.25),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Enhanced material card */
-        .material-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 
-                0 4px 6px -1px rgb(0 0 0 / 0.1), 
-                0 2px 4px -2px rgb(0 0 0 / 0.1);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
+            opacity: 0.1;
             overflow: hidden;
         }
 
-        .material-card::before {
-            content: '';
+        .matrix-bg::before {
+            content: '10110001 01101100 01100001 01100011 01101011 01100101 01100100';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary-gradient);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            color: #00ff00;
+            animation: matrix-rain 20s linear infinite;
+            white-space: nowrap;
         }
 
-        .material-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .material-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 
-                0 20px 25px -5px rgb(0 0 0 / 0.1), 
-                0 10px 10px -5px rgb(0 0 0 / 0.04);
-        }
-
-        /* Animated timeline */
-        .timeline-item {
-            opacity: 0;
-            transform: translateX(-30px);
-            animation: slideIn 0.6s ease forwards;
-        }
-
-        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
-        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
-        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
-        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
-        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 1.25rem;
-            top: 1.25rem;
-            bottom: -1.25rem;
-            width: 2px;
-            background: linear-gradient(to bottom, #667eea, #764ba2);
-            opacity: 0.5;
-        }
-
-        .timeline-item:last-child::before {
-            display: none;
-        }
-
-        .timeline-icon {
-            position: absolute;
-            left: 0rem;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 3rem;
-            height: 3rem;
-            border-radius: 50%;
-            background: var(--primary-gradient);
-            color: white;
-            border: 4px solid #f5f7fa;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(102, 126, 234, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0); }
-        }
-
-        /* Flow arrow animation */
-        .flow-arrow {
-            font-size: 2rem;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: flow 2s ease-in-out infinite;
-        }
-
-        @keyframes flow {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(5px); }
-        }
-
-        /* Chart enhancements */
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-        }
-
-        /* Gradient text */
-        .gradient-text {
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Animated numbers */
-        .animated-number {
-            display: inline-block;
-            animation: countUp 2s ease-out;
-        }
-
-        @keyframes countUp {
+        @keyframes matrix-rain {
             from {
-                opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(-100%);
             }
             to {
-                opacity: 1;
-                transform: translateY(0);
+                transform: translateY(100vh);
             }
         }
 
-        /* Kill chain items */
-        .kill-chain-item {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
-            border-radius: 12px;
-            padding: 1rem;
-            margin: 0.5rem;
+        /* Glitch effect for header */
+        .glitch {
+            position: relative;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-shadow: 
+                0.05em 0 0 rgba(255, 0, 0, .75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, .75),
+                0.025em 0.05em 0 rgba(0, 0, 255, .75);
+            animation: glitch 1s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% {
+                text-shadow: 
+                    0.05em 0 0 rgba(255, 0, 0, .75),
+                    -0.025em -0.05em 0 rgba(0, 255, 0, .75),
+                    0.025em 0.05em 0 rgba(0, 0, 255, .75);
+            }
+            95% {
+                text-shadow: 
+                    0.05em 0 0 rgba(255, 0, 0, .75),
+                    -0.05em -0.025em 0 rgba(0, 255, 0, .75),
+                    0.05em 0.025em 0 rgba(0, 0, 255, .75);
+            }
+        }
+
+        /* Neon glow effect */
+        .neon-box {
+            background: rgba(4, 150, 255, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            box-shadow: 
+                0 0 20px rgba(4, 150, 255, 0.5),
+                inset 0 0 20px rgba(4, 150, 255, 0.1);
+            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
-            cursor: pointer;
-            border: 2px solid transparent;
         }
 
-        .kill-chain-item:hover {
-            background: white;
-            border-color: #667eea;
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+        .neon-box:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 0 40px rgba(4, 150, 255, 0.8),
+                inset 0 0 30px rgba(4, 150, 255, 0.2),
+                0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
-        /* MITRE ATT&CK cards */
-        .attack-card {
+        /* Animated gradient background */
+        .gradient-bg {
+            background: linear-gradient(-45deg, #0a0e27, #1a237e, #0a0e27, #00487c);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Cyberpunk card style */
+        .cyber-card {
+            background: linear-gradient(145deg, rgba(10, 14, 39, 0.9), rgba(26, 35, 126, 0.6));
+            border: 1px solid rgba(4, 150, 255, 0.3);
+            border-radius: 15px;
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
         }
 
-        .attack-card::after {
+        .cyber-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -50%;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff0080, #00ff88, #00d9ff, #ff0080);
+            border-radius: 15px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            animation: rotate-gradient 3s linear infinite;
+        }
+
+        @keyframes rotate-gradient {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cyber-card:hover::before {
+            opacity: 1;
+        }
+
+        .cyber-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(4, 150, 255, 0.3);
+        }
+
+        /* Timeline with animated line */
+        .timeline-line {
+            background: linear-gradient(to bottom, transparent, var(--primary), var(--accent), transparent);
+            width: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s;
-            opacity: 0;
+            background: linear-gradient(to bottom, transparent, white, transparent);
+            animation: timeline-pulse 3s linear infinite;
         }
 
-        .attack-card:hover::after {
-            animation: shine 0.5s ease;
-        }
-
-        @keyframes shine {
-            0% {
-                top: -50%;
-                right: -50%;
-                opacity: 0;
+        @keyframes timeline-pulse {
+            to {
+                top: 200%;
             }
-            50% {
+        }
+
+        /* Enhanced timeline item */
+        .timeline-item {
+            position: relative;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -32px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 4px solid #0a0e27;
+            box-shadow: 0 0 20px rgba(4, 150, 255, 0.8);
+            z-index: 10;
+        }
+
+        .timeline-dot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid rgba(4, 150, 255, 0.5);
+            animation: radar 2s linear infinite;
+        }
+
+        @keyframes radar {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
                 opacity: 1;
             }
             100% {
-                top: 150%;
-                right: 150%;
+                transform: translate(-50%, -50%) scale(2);
                 opacity: 0;
             }
         }
 
-        /* Vulnerability section */
-        .vulnerability-icon {
-            animation: shake 2s ease-in-out infinite;
+        /* Animated number counter */
+        .counter {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            letter-spacing: 0.05em;
         }
 
-        @keyframes shake {
-            0%, 100% { transform: rotate(0deg); }
-            10% { transform: rotate(-5deg); }
-            20% { transform: rotate(5deg); }
-            30% { transform: rotate(-5deg); }
-            40% { transform: rotate(5deg); }
-            50% { transform: rotate(0deg); }
+        /* Flowchart with connections */
+        .flow-connector {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.5;
         }
 
-        /* Scroll reveal animation */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+        .flow-connector::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
         }
 
-        .scroll-reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
+        /* Typing effect */
+        .typing-effect {
+            overflow: hidden;
+            border-right: 3px solid var(--primary);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
         }
 
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            .material-card {
-                padding: 1.5rem;
-            }
-            
-            .timeline-icon {
-                width: 2.5rem;
-                height: 2.5rem;
-                font-size: 1.25rem;
-            }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary) }
+        }
+
+        /* Responsive grid system */
+        .cyber-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         }
 
         /* Loading animation */
         .loader {
-            width: 40px;
-            height: 40px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0e27;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(4, 150, 255, 0.3);
+            border-top: 3px solid var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 20px auto;
+            margin: 0 auto 20px;
         }
 
         @keyframes spin {
@@ -331,390 +331,610 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Tooltip */
-        .tooltip {
+        /* Chart enhancements */
+        .chart-container {
             position: relative;
+            padding: 20px;
+            background: rgba(4, 150, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(4, 150, 255, 0.2);
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .glitch {
+                font-size: 2.5rem;
+            }
+            
+            .cyber-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .timeline-item {
+                transform: translateX(-20px);
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 14, 39, 0.8);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* Pulse animation for important elements */
+        .pulse {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(4, 150, 255, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(4, 150, 255, 0.8);
+            }
+        }
+
+        /* Hover effects for interactive elements */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        /* Badge styles */
+        .badge {
             display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background: rgba(4, 150, 255, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--secondary);
         }
 
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
+        /* Icon animations */
+        .icon-float {
+            animation: float 3s ease-in-out infinite;
         }
 
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800">
+<body class="gradient-bg">
+    <!-- Matrix background effect -->
+    <div class="matrix-bg"></div>
 
-    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
-        
-        <!-- Animated Header -->
-        <header class="text-center mb-12 scroll-reveal">
-            <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-4 animate-pulse">เจาะลึกปฏิบัติการโจรกรรมแห่งศตวรรษ</h1>
-            <p class="text-xl md:text-2xl text-gray-600 mt-2">Anatomy of the Bangladesh Bank Heist</p>
-            <div class="mt-6 flex justify-center space-x-4">
-                <span class="glass-card px-4 py-2 text-sm">🔐 Cybersecurity</span>
-                <span class="glass-card px-4 py-2 text-sm">💰 Financial Crime</span>
-                <span class="glass-card px-4 py-2 text-sm">🌐 SWIFT System</span>
+    <!-- Loading screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p class="text-primary">Initializing Security Analysis...</p>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="relative overflow-hidden py-20 px-4">
+            <div class="container mx-auto text-center relative z-10">
+                <h1 class="glitch text-6xl md:text-8xl mb-4" data-aos="zoom-in">HACKED</h1>
+                <p class="text-2xl md:text-3xl text-cyan-400 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    เจาะลึกปฏิบัติการปล้นธนาคารกลางบังคลาเทศ
+                </p>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="400">
+                    The Bangladesh Bank Cyber Heist - หนึ่งในการโจรกรรมทางไซเบอร์ที่ใหญ่ที่สุดในประวัติศาสตร์
+                </p>
+                <div class="flex justify-center gap-4 mt-8" data-aos="fade-up" data-aos-delay="600">
+                    <span class="badge">💰 $951M Attempted</span>
+                    <span class="badge">🔓 $81M Stolen</span>
+                    <span class="badge">⏱️ 1 Year Operation</span>
+                </div>
             </div>
         </header>
 
-        <main>
-            <!-- Overview Section -->
-            <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-12 scroll-reveal">
-                <div class="glass-card p-8">
-                    <h2 class="text-3xl font-bold gradient-text mb-6">ภาพรวมความเสียหาย</h2>
-                    <p class="text-gray-600 mb-6 leading-relaxed">ในปี 2016 กลุ่มแฮกเกอร์ Lazarus Group ได้พยายามโจรกรรมเงินเกือบ 1 พันล้านดอลลาร์จากธนาคารกลางบังกลาเทศผ่านระบบ SWIFT แม้จะทำไม่สำเร็จทั้งหมด แต่ก็สร้างความเสียหายมหาศาล และเปิดโปงช่องโหว่ร้ายแรงในระบบการเงินโลก</p>
-                    <div class="grid grid-cols-2 gap-6 text-center">
-                        <div class="material-card hover:scale-105 transition-transform">
-                            <p class="text-4xl font-bold text-red-500 animated-number">$951M</p>
-                            <p class="text-gray-500 mt-2">ยอดเงินที่พยายามขโมย</p>
-                        </div>
-                        <div class="material-card hover:scale-105 transition-transform">
-                            <p class="text-4xl font-bold text-green-500 animated-number">$81M</p>
-                            <p class="text-gray-500 mt-2">ยอดเงินที่ขโมยสำเร็จ</p>
-                        </div>
+        <!-- Key Figures Section -->
+        <section class="container mx-auto px-4 py-16">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="neon-box p-8 text-center" data-aos="fade-right">
+                    <p class="text-2xl mb-4 text-cyan-400">มูลค่าความเสียหาย</p>
+                    <p class="text-6xl font-bold text-red-500 counter" data-target="81">0</p>
+                    <p class="text-3xl text-red-400 mb-4">ล้านดอลลาร์</p>
+                    <p class="text-gray-300">ถูกโอนสำเร็จไปยังบัญชีในฟิลิปปินส์</p>
+                    <div class="mt-4 text-sm text-gray-400">
+                        <span class="inline-block w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
+                        Transaction Complete
                     </div>
                 </div>
-                <div class="glass-card p-8">
-                    <h3 class="text-2xl font-semibold text-center gradient-text mb-4">สัดส่วนเงินที่ถูกโจรกรรม</h3>
-                    <div class="chart-container h-64 md:h-80">
-                        <canvas id="heistDonutChart"></canvas>
+                <div class="neon-box p-8 text-center" data-aos="fade-left">
+                    <p class="text-2xl mb-4 text-cyan-400">หยุดยั้งได้เพราะคำผิด</p>
+                    <p class="text-6xl font-bold text-green-500 counter" data-target="850">0</p>
+                    <p class="text-3xl text-green-400 mb-4">ล้านดอลลาร์</p>
+                    <p class="text-gray-300">ถูกระงับไว้ได้ทันหลังพบคำว่า "Fandation"</p>
+                    <div class="mt-4 text-sm text-gray-400">
+                        <span class="inline-block w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+                        Transaction Blocked
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Timeline Section -->
-            <section class="glass-card p-8 mb-12 scroll-reveal">
-                <h2 class="text-3xl font-bold gradient-text mb-8 text-center">เส้นทางการโจมตี: ปฏิบัติการที่ใช้เวลากว่า 1 ปี</h2>
-                <div class="relative pl-10">
-                    <div class="timeline-item relative pb-10 pl-10">
-                        <div class="timeline-icon">📧</div>
-                        <div class="glass-card p-4 ml-4">
-                            <h3 class="text-xl font-semibold text-purple-700">มกราคม 2015: เริ่มต้นสอดแนม</h3>
-                            <p class="text-gray-600 mt-2">ผู้โจมตีเริ่มส่งอีเมล Phishing ไปยังพนักงานธนาคารเพื่อหาช่องทางเจาะเข้าระบบ</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item relative pb-10 pl-10">
-                        <div class="timeline-icon">💻</div>
-                        <div class="glass-card p-4 ml-4">
-                            <h3 class="text-xl font-semibold text-purple-700">มีนาคม 2015: เจาะเข้าระบบสำเร็จ</h3>
-                            <p class="text-gray-600 mt-2">พนักงานพลาดเปิดไฟล์แนบอันตราย ทำให้มัลแวร์ถูกติดตั้ง และผู้โจมตีสามารถเข้าถึงเครือข่ายภายในได้</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item relative pb-10 pl-10">
-                        <div class="timeline-icon">🕵️</div>
-                        <div class="glass-card p-4 ml-4">
-                            <h3 class="text-xl font-semibold text-purple-700">มี.ค. 2015 - ม.ค. 2016: ซุ่มศึกษาและเคลื่อนที่</h3>
-                            <p class="text-gray-600 mt-2">ใช้เวลากว่า 10 เดือนในการซุ่มศึกษาโครงสร้างเครือข่าย ขโมยข้อมูลประจำตัว (Credentials) และเคลื่อนที่อย่างเงียบๆ ไปยังเซิร์ฟเวอร์ SWIFT</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item relative pb-10 pl-10">
-                        <div class="timeline-icon">💰</div>
-                        <div class="glass-card p-4 ml-4">
-                            <h3 class="text-xl font-semibold text-purple-700">4-5 กุมภาพันธ์ 2016: ลงมือโจรกรรม</h3>
-                            <p class="text-gray-600 mt-2">เริ่มส่งคำสั่งโอนเงินปลอมจำนวน 35 รายการ มูลค่ารวม $951 ล้านดอลลาร์</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item relative pb-10 pl-10">
-                        <div class="timeline-icon">❌</div>
-                        <div class="glass-card p-4 ml-4 border-2 border-red-400">
-                            <h3 class="text-xl font-semibold text-red-600">ความผิดพลาดที่ช่วยหยุดยั้ง</h3>
-                            <p class="text-gray-600 mt-2">การสะกดชื่อผู้รับผิด "Fandation" ทำให้ธุรกรรมมูลค่า $20 ล้านที่ส่งไปศรีลังกาถูกระงับ และเป็นจุดเริ่มต้นที่ทำให้ Fed ตรวจสอบและยับยั้งคำสั่งโอนเงินที่เหลืออีกกว่า $850 ล้านได้ทัน</p>
+        <!-- Timeline Section -->
+        <section class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl font-bold text-center mb-12 text-cyan-400" data-aos="fade-up">
+                ⏱️ Timeline การโจมตี
+            </h2>
+            <div class="max-w-4xl mx-auto relative">
+                <div class="timeline-line absolute left-8 top-0 bottom-0"></div>
+                
+                <div class="timeline-item pl-20 mb-12" data-aos="fade-right">
+                    <div class="timeline-dot"></div>
+                    <div class="cyber-card p-6">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-2">กลางปี 2015: Reconnaissance</h3>
+                        <p class="text-gray-300">กลุ่ม Lazarus เริ่มสำรวจและวางแผนการโจมตี ใช้เวลาศึกษาระบบของธนาคารอย่างละเอียด</p>
+                        <div class="mt-3 flex gap-2">
+                            <span class="badge">🔍 Scanning</span>
+                            <span class="badge">📧 Phishing</span>
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- Kill Chain Section -->
-            <section class="glass-card p-8 mb-12 scroll-reveal">
-                <h2 class="text-3xl font-bold gradient-text mb-8 text-center">ขั้นตอนการโจมตีตามหลัก Cyber Kill Chain</h2>
-                <div class="flex flex-wrap items-center justify-center text-center">
-                    <div class="kill-chain-item">
-                        <p class="font-bold text-purple-700">1. Recon</p>
-                        <p class="text-sm">สอดแนม</p>
-                    </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="kill-chain-item">
-                        <p class="font-bold text-purple-700">2. Weaponize</p>
-                        <p class="text-sm">เตรียมมัลแวร์</p>
-                    </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="kill-chain-item">
-                        <p class="font-bold text-purple-700">3. Deliver</p>
-                        <p class="text-sm">ส่ง Phishing</p>
-                    </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="kill-chain-item">
-                        <p class="font-bold text-purple-700">4. Exploit</p>
-                        <p class="text-sm">เจาะระบบ</p>
-                    </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="kill-chain-item">
-                        <p class="font-bold text-purple-700">5. Install</p>
-                        <p class="text-sm">ติดตั้ง Backdoor</p>
-                    </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="kill-chain-item">
-                        <p class="font-bold text-purple-700">6. C2</p>
-                        <p class="text-sm">ควบคุมสั่งการ</p>
-                    </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="kill-chain-item">
-                        <p class="font-bold text-purple-700">7. Actions</p>
-                        <p class="text-sm">ขโมยเงิน</p>
+                <div class="timeline-item pl-20 mb-12" data-aos="fade-right" data-aos-delay="100">
+                    <div class="timeline-dot"></div>
+                    <div class="cyber-card p-6">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-2">4 ก.พ. 2016: Execution</h3>
+                        <p class="text-gray-300">เริ่มส่งคำสั่งโอนเงินปลอม 35 รายการ มูลค่ารวม $951 ล้าน ผ่านระบบ SWIFT</p>
+                        <div class="mt-3 flex gap-2">
+                            <span class="badge">💻 Malware Active</span>
+                            <span class="badge">🏦 SWIFT Compromised</span>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- MITRE ATT&CK Section -->
-            <section class="mb-12 scroll-reveal">
-                <h2 class="text-3xl font-bold gradient-text mb-8 text-center">วิเคราะห์เทคนิคเชิงลึกด้วย MITRE ATT&CK</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="material-card attack-card">
-                        <h3 class="font-bold text-xl text-purple-700 mb-2">🛡️ Initial Access</h3>
-                        <p class="font-semibold text-gray-600">T1566.001: Spearphishing</p>
-                        <p class="mt-3 text-sm leading-relaxed">ส่งอีเมลหลอกลวงพร้อมไฟล์แนบอันตรายไปยังพนักงาน เพื่อเป็นประตูบานแรกในการเข้าสู่เครือข่าย</p>
-                    </div>
-                    <div class="material-card attack-card">
-                        <h3 class="font-bold text-xl text-purple-700 mb-2">🔑 Credential Access</h3>
-                        <p class="font-semibold text-gray-600">T1056.001: Keylogging</p>
-                        <p class="mt-3 text-sm leading-relaxed">ติดตั้งโปรแกรมดักจับการกดคีย์บอร์ดเพื่อขโมย Username และ Password ที่ใช้เข้าระบบ SWIFT</p>
-                    </div>
-                    <div class="material-card attack-card">
-                        <h3 class="font-bold text-xl text-purple-700 mb-2">➡️ Lateral Movement</h3>
-                        <p class="font-semibold text-gray-600">T1021.001: RDP</p>
-                        <p class="mt-3 text-sm leading-relaxed">ใช้ Credentials ที่ขโมยมาเพื่อรีโมท (RDP) ไปยังเครื่องคอมพิวเตอร์อื่นๆ ภายในเครือข่าย จนไปถึงเซิร์ฟเวอร์เป้าหมาย</p>
-                    </div>
-                    <div class="material-card attack-card">
-                        <h3 class="font-bold text-xl text-purple-700 mb-2">👻 Defense Evasion</h3>
-                        <p class="font-semibold text-gray-600">T1070.004: File Deletion</p>
-                        <p class="mt-3 text-sm leading-relaxed">พยายามลบไฟล์ Log และเครื่องมือของตัวเองหลังจากใช้งานเสร็จ เพื่อปกปิดร่องรอยและทำให้การสืบสวนยากขึ้น</p>
-                    </div>
-                    <div class="material-card attack-card md:col-span-2 lg:col-span-1">
-                        <h3 class="font-bold text-xl text-red-600 mb-2">💥 Impact</h3>
-                        <p class="font-semibold text-gray-600">T1499.002: Financial Theft</p>
-                        <p class="mt-3 text-sm leading-relaxed">เป้าหมายสูงสุดคือการใช้ระบบ SWIFT ส่งคำสั่งโอนเงินปลอมเพื่อขโมยเงินโดยตรงจากธนาคาร</p>
+                <div class="timeline-item pl-20 mb-12" data-aos="fade-right" data-aos-delay="200">
+                    <div class="timeline-dot"></div>
+                    <div class="cyber-card p-6">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-2">5 ก.พ. 2016: Partial Success</h3>
+                        <p class="text-gray-300">$81M โอนสำเร็จ แต่ $20M ถูกระงับเพราะสะกดคำผิด "Fandation" แทนที่จะเป็น "Foundation"</p>
+                        <div class="mt-3 flex gap-2">
+                            <span class="badge">✅ $81M Success</span>
+                            <span class="badge">❌ Typo Error</span>
+                        </div>
                     </div>
                 </div>
-            </section>
-            
-            <!-- Vulnerabilities Section -->
-            <section class="glass-card p-8 mb-12 bg-gradient-to-br from-red-50 to-orange-50 scroll-reveal">
-                <h2 class="text-3xl font-bold text-red-700 mb-8 text-center">จุดอ่อนร้ายแรง: ช่องโหว่ความปลอดภัยขั้นพื้นฐาน</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
-                    <div class="material-card hover:border-red-400 border-2 border-transparent">
-                        <p class="text-6xl mb-4 vulnerability-icon">🚫</p>
-                        <h3 class="text-2xl font-bold text-gray-800">ไม่มี Firewall</h3>
-                        <p class="text-gray-600 mt-3 leading-relaxed">เครือข่ายสำคัญของระบบ SWIFT ไม่ได้ถูกแยกออกจากเครือข่ายทั่วไป ทำให้เมื่อแฮกเกอร์เข้ามาได้ ก็สามารถเคลื่อนที่ได้อย่างอิสระ</p>
-                    </div>
-                    <div class="material-card hover:border-red-400 border-2 border-transparent">
-                        <p class="text-6xl mb-4 vulnerability-icon">💸</p>
-                        <h3 class="text-2xl font-bold text-gray-800">อุปกรณ์ราคาถูก</h3>
-                        <p class="text-gray-600 mt-3 leading-relaxed">มีการใช้สวิตช์เครือข่ายมือสองราคาเพียง $10 ในการเชื่อมต่อระบบที่มีความสำคัญสูงสุด ซึ่งขาดคุณสมบัติด้านความปลอดภัยที่จำเป็น</p>
-                    </div>
-                </div>
-            </section>
 
-            <!-- Lessons Learned Section -->
-            <section class="glass-card p-8 scroll-reveal">
-                <h2 class="text-3xl font-bold gradient-text mb-8 text-center">บทเรียนที่โลกการเงินต้องจดจำ</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="material-card hover:shadow-lg">
-                        <h3 class="font-bold text-lg text-purple-700 mb-2">🔒 Network Segmentation คือสิ่งจำเป็น</h3>
-                        <p class="text-gray-600">ต้องแยกเครือข่ายที่มีความสำคัญสูง (Critical Network) ออกจากเครือข่ายทั่วไปอย่างเด็ดขาด</p>
-                    </div>
-                    <div class="material-card hover:shadow-lg">
-                        <h3 class="font-bold text-lg text-purple-700 mb-2">💎 ลงทุนในความปลอดภัยขั้นพื้นฐาน</h3>
-                        <p class="text-gray-600">การใช้อุปกรณ์ที่เหมาะสมและมี Firewall เป็นสิ่งที่ห้ามมองข้ามเด็ดขาด</p>
-                    </div>
-                    <div class="material-card hover:shadow-lg">
-                        <h3 class="font-bold text-lg text-purple-700 mb-2">👥 "คน" คือจุดอ่อนที่สำคัญที่สุด</h3>
-                        <p class="text-gray-600">การฝึกอบรมพนักงานให้ตระหนักถึงภัยคุกคามทางไซเบอร์เป็นเกราะป้องกันที่คุ้มค่าที่สุด</p>
-                    </div>
-                    <div class="material-card hover:shadow-lg">
-                        <h3 class="font-bold text-lg text-purple-700 mb-2">✅ กระบวนการต้องรัดกุม</h3>
-                        <p class="text-gray-600">ธุรกรรมมูลค่าสูงต้องมีกระบวนการตรวจสอบและยืนยันหลายขั้นตอน (Multi-person approval)</p>
+                <div class="timeline-item pl-20 mb-12" data-aos="fade-right" data-aos-delay="300">
+                    <div class="timeline-dot"></div>
+                    <div class="cyber-card p-6">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-2">6-8 ก.พ. 2016: Discovery</h3>
+                        <p class="text-gray-300">พนักงานธนาคารพบว่าเครื่องพิมพ์ SWIFT ไม่ทำงาน ซึ่งเป็นส่วนหนึ่งของแผนปกปิดร่องรอย</p>
+                        <div class="mt-3 flex gap-2">
+                            <span class="badge">🖨️ Printer Malfunction</span>
+                            <span class="badge">🚨 Alert Raised</span>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-        </main>
+                <div class="timeline-item pl-20 mb-12" data-aos="fade-right" data-aos-delay="400">
+                    <div class="timeline-dot"></div>
+                    <div class="cyber-card p-6">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-2">9 ก.พ. 2016: Investigation</h3>
+                        <p class="text-gray-300">ธนาคารกลางบังกลาเทศตระหนักถึงการโจรกรรม เริ่มการสืบสวนและติดต่อ Fed เพื่อระงับธุรกรรม</p>
+                        <div class="mt-3 flex gap-2">
+                            <span class="badge">🔍 Forensics</span>
+                            <span class="badge">🌐 International Alert</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kill Chain Section -->
+        <section class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl font-bold text-center mb-12 text-cyan-400" data-aos="fade-up">
+                🎯 Cyber Kill Chain Analysis
+            </h2>
+            <div class="cyber-grid">
+                <div class="cyber-card p-6 hover-lift" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="text-5xl mb-4 icon-float">🕵️</div>
+                    <h3 class="text-xl font-bold text-cyan-400 mb-2">1. Reconnaissance</h3>
+                    <p class="text-gray-300">สำรวจเป้าหมาย ศึกษาโครงสร้างระบบ SWIFT และหาจุดอ่อน</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded"></div>
+                </div>
+
+                <div class="cyber-card p-6 hover-lift" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="text-5xl mb-4 icon-float">🔧</div>
+                    <h3 class="text-xl font-bold text-cyan-400 mb-2">2. Weaponization</h3>
+                    <p class="text-gray-300">สร้างมัลแวร์เฉพาะกิจสำหรับระบบ SWIFT และเครื่องพิมพ์</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded"></div>
+                </div>
+
+                <div class="cyber-card p-6 hover-lift" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="text-5xl mb-4 icon-float">📧</div>
+                    <h3 class="text-xl font-bold text-cyan-400 mb-2">3. Delivery</h3>
+                    <p class="text-gray-300">ส่งอีเมล Spear-phishing ไปยังพนักงานเป้าหมาย</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded"></div>
+                </div>
+
+                <div class="cyber-card p-6 hover-lift" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="text-5xl mb-4 icon-float">💥</div>
+                    <h3 class="text-xl font-bold text-cyan-400 mb-2">4. Exploitation</h3>
+                    <p class="text-gray-300">พนักงานเปิดไฟล์แนบ มัลแวร์เริ่มทำงานและเจาะเข้าระบบ</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded"></div>
+                </div>
+
+                <div class="cyber-card p-6 hover-lift" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="text-5xl mb-4 icon-float">💾</div>
+                    <h3 class="text-xl font-bold text-cyan-400 mb-2">5. Installation</h3>
+                    <p class="text-gray-300">ติดตั้ง Backdoor และมัลแวร์ถาวรในระบบ SWIFT</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded"></div>
+                </div>
+
+                <div class="cyber-card p-6 hover-lift" data-aos="zoom-in" data-aos-delay="600">
+                    <div class="text-5xl mb-4 icon-float">📡</div>
+                    <h3 class="text-xl font-bold text-cyan-400 mb-2">6. Command & Control</h3>
+                    <p class="text-gray-300">เชื่อมต่อกับ C&C Server เพื่อควบคุมการโจมตีจากระยะไกล</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded"></div>
+                </div>
+
+                <div class="cyber-card p-6 hover-lift md:col-span-2 lg:col-span-1" data-aos="zoom-in" data-aos-delay="700">
+                    <div class="text-5xl mb-4 icon-float">💰</div>
+                    <h3 class="text-xl font-bold text-cyan-400 mb-2">7. Actions on Objectives</h3>
+                    <p class="text-gray-300">ส่งคำสั่งโอนเงินปลอม ปกปิดร่องรอย และทำลายหลักฐาน</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-red-500 to-orange-500 rounded"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vulnerabilities Section -->
+        <section class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl font-bold text-center mb-12 text-red-400" data-aos="fade-up">
+                ⚠️ Critical Vulnerabilities
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="neon-box p-6 text-center pulse" data-aos="flip-left">
+                    <div class="text-6xl mb-4">🌐</div>
+                    <h3 class="text-xl font-bold text-red-400 mb-2">No Network Segmentation</h3>
+                    <p class="text-gray-300">SWIFT network ไม่ได้แยกจากเครือข่ายทั่วไป</p>
+                </div>
+
+                <div class="neon-box p-6 text-center pulse" data-aos="flip-left" data-aos-delay="100">
+                    <div class="text-6xl mb-4">🔓</div>
+                    <h3 class="text-xl font-bold text-red-400 mb-2">Weak Security</h3>
+                    <p class="text-gray-300">ไม่มี Firewall และใช้ Switch ราคา $10</p>
+                </div>
+
+                <div class="neon-box p-6 text-center pulse" data-aos="flip-left" data-aos-delay="200">
+                    <div class="text-6xl mb-4">👤</div>
+                    <h3 class="text-xl font-bold text-red-400 mb-2">Human Factor</h3>
+                    <p class="text-gray-300">พนักงานขาดความตระหนักด้าน Cybersecurity</p>
+                </div>
+
+                <div class="neon-box p-6 text-center pulse" data-aos="flip-left" data-aos-delay="300">
+                    <div class="text-6xl mb-4">📋</div>
+                    <h3 class="text-xl font-bold text-red-400 mb-2">Poor Procedures</h3>
+                    <p class="text-gray-300">ไม่มี Multi-factor Authentication</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MITRE ATT&CK Chart -->
+        <section class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl font-bold text-center mb-12 text-cyan-400" data-aos="fade-up">
+                🎯 MITRE ATT&CK Framework
+            </h2>
+            <div class="neon-box p-8" data-aos="fade-up">
+                <div class="chart-container">
+                    <canvas id="mitreChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cost Analysis -->
+        <section class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl font-bold text-center mb-12 text-cyan-400" data-aos="fade-up">
+                💸 Cost vs Damage Analysis
+            </h2>
+            <div class="neon-box p-8" data-aos="fade-up">
+                <div class="chart-container">
+                    <canvas id="costChart"></canvas>
+                </div>
+                <p class="text-center text-gray-300 mt-4">
+                    การลงทุนในความปลอดภัยเพียง $50,000 สามารถป้องกันความเสียหายกว่า $951,000,000
+                </p>
+            </div>
+        </section>
+
+        <!-- Lessons Learned -->
+        <section class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl font-bold text-center mb-12 text-cyan-400" data-aos="fade-up">
+                📚 Key Takeaways
+            </h2>
+            <div class="cyber-grid">
+                <div class="cyber-card p-6" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-4">🔒 Network Security</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• Implement proper network segmentation</li>
+                        <li>• Use enterprise-grade security equipment</li>
+                        <li>• Regular security audits and updates</li>
+                    </ul>
+                </div>
+
+                <div class="cyber-card p-6" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-4">👥 Human Factor</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• Regular cybersecurity training</li>
+                        <li>• Phishing awareness programs</li>
+                        <li>• Security-first culture</li>
+                    </ul>
+                </div>
+
+                <div class="cyber-card p-6" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-4">📋 Procedures</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• Multi-factor authentication</li>
+                        <li>• Dual approval for high-value transactions</li>
+                        <li>• Regular security drills</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
         <!-- Footer -->
-        <footer class="text-center mt-16 text-gray-500 text-sm">
-            <p>Infographic created based on the Bangladesh Bank Heist case study.</p>
-            <p class="mt-2">© 2024 - Enhanced with modern web technologies</p>
+        <footer class="text-center py-8 border-t border-gray-800">
+            <p class="text-gray-400">
+                Interactive Infographic - Bangladesh Bank Heist Analysis
+            </p>
+            <p class="text-gray-500 text-sm mt-2">
+                © 2024 - Built with modern web technologies
+            </p>
         </footer>
     </div>
 
     <script>
-        // Scroll reveal animation
-        function revealOnScroll() {
-            const reveals = document.querySelectorAll('.scroll-reveal');
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Hide loader when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Animated counter
+        function animateCounter() {
+            const counters = document.querySelectorAll('.counter');
             
-            reveals.forEach(element => {
-                const windowHeight = window.innerHeight;
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const increment = target / 100;
                 
-                if (elementTop < windowHeight - elementVisible) {
-                    element.classList.add('revealed');
-                }
+                const updateCounter = () => {
+                    const current = +counter.innerText;
+                    
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current + increment);
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                
+                // Start animation when element is in viewport
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            updateCounter();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                observer.observe(counter);
             });
         }
 
-        window.addEventListener('scroll', revealOnScroll);
-        document.addEventListener('DOMContentLoaded', revealOnScroll);
+        animateCounter();
+
+        // Timeline animation on scroll
+        function animateTimeline() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            timelineItems.forEach(item => {
+                observer.observe(item);
+            });
+        }
+
+        animateTimeline();
 
         // Chart.js configuration
-        document.addEventListener('DOMContentLoaded', () => {
-            const wrapLabel = (label) => {
-                const maxLength = 16;
-                if (label.length <= maxLength) {
-                    return label;
-                }
-                const words = label.split(' ');
-                const lines = [];
-                let currentLine = '';
-                for (const word of words) {
-                    if ((currentLine + ' ' + word).trim().length > maxLength) {
-                        lines.push(currentLine.trim());
-                        currentLine = word;
-                    } else {
-                        currentLine = (currentLine + ' ' + word).trim();
-                    }
-                }
-                if (currentLine) {
-                    lines.push(currentLine.trim());
-                }
-                return lines;
-            };
-
-            const tooltipTitleCallback = (tooltipItems) => {
-                const item = tooltipItems[0];
-                let label = item.chart.data.labels[item.dataIndex];
-                if (Array.isArray(label)) {
-                    return label.join(' ');
-                } else {
-                    return label;
-                }
-            };
-            
-            const heistData = {
-                labels: ['ขโมยสำเร็จ (ไปฟิลิปปินส์)', 'ระงับโดย Fed', 'ธุรกรรมถูกระงับ (ไปศรีลังกา)'],
-                datasets: [{
-                    label: 'ยอดเงิน (ล้านดอลลาร์)',
-                    data: [81, 850, 20],
-                    backgroundColor: [
-                        'rgba(239, 68, 68, 0.8)', 
-                        'rgba(34, 197, 94, 0.8)', 
-                        'rgba(59, 130, 246, 0.8)'
-                    ],
-                    borderColor: [
-                        'rgba(239, 68, 68, 1)',
-                        'rgba(34, 197, 94, 1)',
-                        'rgba(59, 130, 246, 1)'
-                    ],
-                    borderWidth: 2
-                }]
-            };
-            
-            heistData.labels = heistData.labels.map(wrapLabel);
-
-            const donutCtx = document.getElementById('heistDonutChart').getContext('2d');
-            const gradient1 = donutCtx.createLinearGradient(0, 0, 0, 300);
-            gradient1.addColorStop(0, 'rgba(239, 68, 68, 1)');
-            gradient1.addColorStop(1, 'rgba(239, 68, 68, 0.6)');
-
-            const gradient2 = donutCtx.createLinearGradient(0, 0, 0, 300);
-            gradient2.addColorStop(0, 'rgba(34, 197, 94, 1)');
-            gradient2.addColorStop(1, 'rgba(34, 197, 94, 0.6)');
-
-            const gradient3 = donutCtx.createLinearGradient(0, 0, 0, 300);
-            gradient3.addColorStop(0, 'rgba(59, 130, 246, 1)');
-            gradient3.addColorStop(1, 'rgba(59, 130, 246, 0.6)');
-
-            heistData.datasets[0].backgroundColor = [gradient1, gradient2, gradient3];
-
-            new Chart(donutCtx, {
-                type: 'doughnut',
-                data: heistData,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: {
-                        animateScale: true,
-                        animateRotate: true
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                padding: 20,
-                                font: {
-                                    size: 14
-                                }
-                            }
-                        },
-                        title: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                title: tooltipTitleCallback,
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed !== null) {
-                                        label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed * 1000000);
-                                    }
-                                    return label;
-                                }
-                            },
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            titleColor: '#fff',
-                            bodyColor: '#fff',
-                            borderColor: 'rgba(255, 255, 255, 0.3)',
-                            borderWidth: 1,
-                            padding: 12,
-                            cornerRadius: 8
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#e0e0e0',
+                        font: {
+                            family: "'Kanit', sans-serif"
                         }
                     }
                 }
-            });
-
-            // Animate numbers on scroll
-            const animateNumbers = () => {
-                const numbers = document.querySelectorAll('.animated-number');
-                numbers.forEach(num => {
-                    const rect = num.getBoundingClientRect();
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        num.style.animationPlayState = 'running';
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#e0e0e0',
+                        font: {
+                            family: "'Kanit', sans-serif"
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
                     }
-                });
-            };
+                },
+                y: {
+                    ticks: {
+                        color: '#e0e0e0',
+                        font: {
+                            family: "'Kanit', sans-serif"
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    }
+                }
+            }
+        };
 
-            window.addEventListener('scroll', animateNumbers);
-            animateNumbers();
+        // MITRE ATT&CK Chart
+        const mitreCtx = document.getElementById('mitreChart').getContext('2d');
+        const mitreChart = new Chart(mitreCtx, {
+            type: 'radar',
+            data: {
+                labels: [
+                    'Initial Access',
+                    'Execution',
+                    'Persistence',
+                    'Privilege Escalation',
+                    'Defense Evasion',
+                    'Credential Access',
+                    'Discovery',
+                    'Lateral Movement',
+                    'Collection',
+                    'Command & Control',
+                    'Exfiltration',
+                    'Impact'
+                ],
+                datasets: [{
+                    label: 'Techniques Used',
+                    data: [3, 4, 3, 2, 5, 4, 3, 3, 4, 4, 2, 5],
+                    borderColor: '#00d9ff',
+                    backgroundColor: 'rgba(0, 217, 255, 0.2)',
+                    pointBackgroundColor: '#00d9ff',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#00d9ff'
+                }]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    r: {
+                        ticks: {
+                            color: '#e0e0e0',
+                            backdropColor: 'transparent'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        pointLabels: {
+                            color: '#e0e0e0',
+                            font: {
+                                size: 12,
+                                family: "'Kanit', sans-serif"
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Cost Analysis Chart
+        const costCtx = document.getElementById('costChart').getContext('2d');
+        const costChart = new Chart(costCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Security Investment', 'Attempted Theft', 'Actual Loss'],
+                datasets: [{
+                    label: 'Amount (USD)',
+                    data: [50000, 951000000, 81000000],
+                    backgroundColor: [
+                        'rgba(75, 179, 253, 0.8)',
+                        'rgba(255, 183, 0, 0.8)',
+                        'rgba(255, 0, 53, 0.8)'
+                    ],
+                    borderColor: [
+                        '#4bb3fd',
+                        '#ffb700',
+                        '#ff0035'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    y: {
+                        type: 'logarithmic',
+                        ticks: {
+                            color: '#e0e0e0',
+                            callback: function(value) {
+                                if (value === 1000000000) return '$1B';
+                                if (value === 100000000) return '$100M';
+                                if (value === 10000000) return '$10M';
+                                if (value === 1000000) return '$1M';
+                                if (value === 100000) return '$100K';
+                                if (value === 10000) return '$10K';
+                                return null;
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#e0e0e0'
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Add parallax effect to background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.matrix-bg');
+            parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
         });
     </script>
 </body>
